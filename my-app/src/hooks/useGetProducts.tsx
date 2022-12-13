@@ -1,11 +1,11 @@
-import axios, { AxiosError } from 'axios';
-import { useQuery, UseQueryResult } from 'react-query';
-import { ProductResponse } from './types';
+import axios, { AxiosError } from "axios";
+import { useQuery, UseQueryResult } from "react-query";
+import { ProductResponse } from "../types";
 
-const eCommerceAPI = axios.create({baseURL:process.env.REACT_APP_BASE_URL})
+const eCommerceAPI = axios.create({ baseURL: process.env.REACT_APP_BASE_URL });
 
 const useGetProducts = (): UseQueryResult<ProductResponse, AxiosError> => {
-  return useQuery<ProductResponse, AxiosError>('products', getProducts(), {
+  return useQuery<ProductResponse, AxiosError>("products", getProducts(), {
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
