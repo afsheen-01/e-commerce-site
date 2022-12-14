@@ -9,10 +9,7 @@ export const Home = (): ReactElement => {
 
   return (
     <PageWrap>
-      <SimpleGrid
-        spacing={4}
-        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-      >
+      <SimpleGrid columns={[2, null, 4]} spacingX="0px" spacingY="20px">
         {data?.map(
           (product): ReactElement => (
             <ProductCard key={`product-${product.id}`} product={product} />

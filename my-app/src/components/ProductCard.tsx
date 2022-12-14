@@ -36,7 +36,9 @@ export const ProductCard = ({ product }: { product: Product }) => {
           maxH="200px"
         />
         <Stack mt="6" spacing="3">
-          <Heading size="md">{product.title}</Heading>
+          <Heading size="md" fontFamily="heading">
+            {product.title}
+          </Heading>
           <Text>{product.description}</Text>
         </Stack>
       </CardBody>
