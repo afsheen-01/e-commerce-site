@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import { ReactElement } from "react";
 
 type CustomBoxProps = {
@@ -6,7 +6,7 @@ type CustomBoxProps = {
   bgColor?: string;
 };
 
-export const CustomBox = (props: CustomBoxProps): ReactElement => {
+export const CustomBox = (props: CustomBoxProps | BoxProps): ReactElement => {
   const { children, bgColor = "primary.100", ...rest } = props;
   return (
     <Box p={4} bgColor={bgColor} {...rest}>

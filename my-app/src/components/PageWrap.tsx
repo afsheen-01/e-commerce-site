@@ -11,7 +11,7 @@ export const PageWrap = ({
   return (
     <VStack align="stretch">
       <Header />
-      <Box h="63vw" overflow="scroll">
+      <Box h="74vh" overflow="scroll">
         {children}
       </Box>
       <Footer />
