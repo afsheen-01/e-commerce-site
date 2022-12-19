@@ -41,7 +41,7 @@ export const Footer = (): ReactElement => {
         </VStack>
       </Flex>
       <Box as={VStack} width="100%">
-        <Text as={Flex} alignItems="center" color="white">
+        <Text as={Flex} alignItems="center" color="primary.asBg">
           <Icon as={FaCopyright} m={2} />
           All Rights Reserved by Binks
         </Text>

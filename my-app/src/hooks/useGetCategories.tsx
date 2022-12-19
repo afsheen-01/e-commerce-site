@@ -1,10 +1,10 @@
 import { AxiosError } from "axios";
 import { useQuery, UseQueryResult } from "react-query";
-import { ProductResponse } from "../types";
+import { Categories } from "../types";
 import { ecommerceBaseURL } from "../utils/baseURL";
 
-const useGetProducts = (): UseQueryResult<ProductResponse, AxiosError> => {
-  return useQuery<ProductResponse, AxiosError>("categories", getProducts(), {
+const useGetCategories = (): UseQueryResult<Categories, AxiosError> => {
+  return useQuery<Categories, AxiosError>("products", getProducts(), {
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -13,9 +13,9 @@ const useGetProducts = (): UseQueryResult<ProductResponse, AxiosError> => {
 
 const getProducts = () => {
   return async () => {
-    const res = await ecommerceBaseURL.get<ProductResponse>(`/products`);
+    const res = await ecommerceBaseURL.get<Categories>(`/products/categories`);
     return res.data;
   };
 };
 
-export default useGetProducts;
+export default useGetCategories;

@@ -7,9 +7,9 @@ export const QuantityButtonGroup = () => {
   return (
     <ButtonGroup as={HStack} spacing="2">
       <IconButton
-        bgColor="primary.50"
+        bgColor="primary.asBg"
         _hover={{ bg: "#DA2F71" }}
-        color="white"
+        color="primary.100"
         size="sm"
         height={7}
         icon={<FaMinus />}
@@ -19,9 +19,9 @@ export const QuantityButtonGroup = () => {
 
       <Heading size="md">{count}</Heading>
       <IconButton
-        bgColor="primary.50"
+        bgColor="primary.asBg"
         _hover={{ bg: "#DA2F71" }}
-        color="white"
+        color="primary.100"
         size="sm"
         height={7}
         icon={<FaPlus />}

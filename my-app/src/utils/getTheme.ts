@@ -10,6 +10,7 @@ export const getTheme = () => {
         "50": "#E05288",
         "30": "#EA86AC",
         "10": "#F3BAD0",
+        asBg: "rgba(243, 186, 208, 0.4)",
       },
       white: "#FFF",
       gray: {

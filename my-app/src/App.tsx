@@ -6,8 +6,10 @@ import { OrderSummary } from "./pages/OrderSummary";
 import { Products } from "./pages/Products";
 import { Home } from "./pages/Home";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Provider } from "react-redux";
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { getTheme } from "./utils/getTheme";
+import { store } from "./redux/store";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -15,19 +17,21 @@ const App = () => {
 
   return (
     <Box m={0}>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={theme}>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/summary" element={<OrderSummary />} />
-            </Routes>
-          </Router>
-        </ChakraProvider>
-      </QueryClientProvider>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <ChakraProvider theme={theme}>
+            <Router>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/summary" element={<OrderSummary />} />
+              </Routes>
+            </Router>
+          </ChakraProvider>
+        </QueryClientProvider>
+      </Provider>
     </Box>
   );
 };
