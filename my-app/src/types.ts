@@ -11,6 +11,7 @@ export type Product = {
     rate: number;
   };
   title: string;
+  quantity?: number;
 };
 export type ProductResponse = Array<Product>;
 export type Cart = Array<{ id: number; quantity: number }>;

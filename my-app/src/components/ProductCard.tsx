@@ -13,17 +13,40 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   useDisclosure,
   Box,
   SimpleGrid,
   Flex,
+  ButtonGroup,
+  HStack,
+  IconButton,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { updateCart, updateCount } from "../redux/cartSlice";
+import { RootState } from "../redux/store";
 import { Product } from "../types";
-import { QuantityButtonGroup } from "./QuantityButtonGroup";
 
 export const ProductCard = ({ product }: { product: Product }) => {
+  const [quantity, setQuantity] = useState<number>(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const cart = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isItemInCart = cart.find((item) => item.id === product.id);
+
+    if (isItemInCart) {
+      dispatch(updateCount({ id: product.id, quantity }));
+      dispatch(updateCart({ ...product, quantity }));
+    }
+    if (!isItemInCart && quantity > 0) {
+      dispatch(updateCart({ ...product, quantity }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product, quantity]);
   return (
     <>
       <Card
@@ -58,7 +81,32 @@ export const ProductCard = ({ product }: { product: Product }) => {
           <Text as="b" fontSize="md" mx={2}>
             Add to Cart:
           </Text>
-          <QuantityButtonGroup />
+          <ButtonGroup as={HStack} spacing="2">
+            <IconButton
+              bgColor="primary.asBg"
+              _hover={{ bg: "#DA2F7161" }}
+              color="primary.100"
+              size="sm"
+              height={7}
+              icon={<FaMinus />}
+              aria-label={"decrease-items"}
+              onClick={() => setQuantity(quantity > 0 ? quantity - 1 : 0)}
+            />
+
+            <Heading size="md">{quantity}</Heading>
+            <IconButton
+              bgColor="primary.asBg"
+              _hover={{ bg: "#DA2F7161" }}
+              color="primary.100"
+              size="sm"
+              height={7}
+              icon={<FaPlus />}
+              aria-label={"add-item"}
+              onClick={() => {
+                setQuantity(quantity + 1);
+              }}
+            />
+          </ButtonGroup>
         </CardFooter>
       </Card>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -87,12 +135,33 @@ export const ProductCard = ({ product }: { product: Product }) => {
                 <Text as="b" fontSize="md">
                   Add to Cart:
                 </Text>
-                <QuantityButtonGroup />
+                <ButtonGroup as={HStack} spacing="2">
+                  <IconButton
+                    bgColor="primary.asBg"
+                    _hover={{ bg: "#DA2F7161" }}
+                    color="primary.100"
+                    size="sm"
+                    height={7}
+                    icon={<FaMinus />}
+                    aria-label={"decrease-items"}
+                    onClick={() => setQuantity(quantity > 0 ? quantity - 1 : 0)}
+                  />
+
+                  <Heading size="md">{quantity}</Heading>
+                  <IconButton
+                    bgColor="primary.asBg"
+                    _hover={{ bg: "#DA2F7161" }}
+                    color="primary.100"
+                    size="sm"
+                    height={7}
+                    icon={<FaPlus />}
+                    aria-label={"add-item"}
+                    onClick={() => setQuantity(quantity + 1)}
+                  />
+                </ButtonGroup>
               </Box>
             </Box>
           </ModalBody>
-
-          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>

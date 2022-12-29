@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import cartReducer from "./cartSlice";
 import loginReducer from "./loginSlice";
 
 export const store = configureStore({
-  reducer: { login: loginReducer },
+  reducer: { login: loginReducer, cart: cartReducer },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
