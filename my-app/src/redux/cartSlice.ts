@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { WritableDraft } from "immer/dist/internal";
 import { Product } from "../types";
-import { RootState } from "./store";
 
 const initialState: Product[] = [];
 
@@ -46,6 +45,7 @@ export const cartReducer = createSlice({
 });
 
 export const { updateCart, updateCount } = cartReducer.actions;
-export const setCartitems = (state: RootState) => state.cart;
+// export const setCartitems = (state: RootState) => state.cart;
+// export const;
 
 export default cartReducer.reducer;

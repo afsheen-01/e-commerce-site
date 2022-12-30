@@ -35,9 +35,4 @@ export type AllStates = {
     type: "LOGOUT";
     payload: { username: string; password: string; isLoggedIn: false };
   };
-  IS_LOGGED_IN: { type: "IS_LOGGED_IN"; payload: boolean };
-  // ADD_ITEM: "ADD";
-  // REMOVE_ITEM: "REMOVE";
-  // CHECKOUT: "CHECKOUT";
-  // IS_CHECKOUT_SUCCESSFUL: Boolean;
 };

@@ -1,16 +1,18 @@
 import { ReactElement } from "react";
-import { useSelector } from "react-redux";
 import { PageWrap } from "../components/PageWrap";
 import { ProductCard } from "../components/ProductCard";
-import { RootState } from "../redux/store";
-import { useSetSessionStorage } from "../utils/useSetSessionStorage";
+import { Product } from "../types";
+import { parseJSON } from "./parseJSON";
 
 export const Cart = (): ReactElement => {
+  const cart = parseJSON("cart");
+  console.log(cart);
+
   return (
     <PageWrap>
-      {/* {cart.map((item) => (
+      {cart.map((item: Product) => (
         <ProductCard product={item} key={item.id} />
-      ))} */}
+      ))}
     </PageWrap>
   );
 };
