@@ -1,31 +1,17 @@
 import { Button, Text, Stack } from "@chakra-ui/react";
-import { AnyAction, Dispatch } from "@reduxjs/toolkit";
-import { SetStateAction } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { updateCredentials } from "../redux/loginSlice";
+import { RootState } from "../redux/store";
 
-export const LoggedInCard = ({
-  username,
-  loginName,
-  password,
-  passwordFromSession,
-  setUsername,
-  setPassword,
-  dispatch,
-}: {
-  username: string;
-  loginName: string;
-  passwordFromSession: string;
-  password: string;
-  setUsername: React.Dispatch<SetStateAction<string>>;
-  setPassword: React.Dispatch<SetStateAction<string>>;
-  dispatch: Dispatch<AnyAction>;
-}) => {
+export const LoggedInCard = () => {
+  const login = useSelector((state: RootState) => state.login);
+  const { username, password } = login;
+  const dispatch = useDispatch();
+
   return (
     <Stack>
-      <Text color="gray.50">Username: {username || loginName}</Text>
-      <Text color="gray.50">
-        Password: {"*".repeat(passwordFromSession.length || password.length)}
-      </Text>
+      <Text color="gray.50">Username: {username}</Text>
+      <Text color="gray.50">Password: {"*".repeat(password.length)}</Text>
       <Button
         bgColor="primary.asBg"
         color="primary.100"
@@ -33,9 +19,9 @@ export const LoggedInCard = ({
         mt={4}
         type="submit"
         onClick={() => {
-          setUsername("");
-          setPassword("");
-          dispatch(updateCredentials({ isLoggedIn: false }));
+          dispatch(
+            updateCredentials({ isLoggedIn: false, username: "", password: "" })
+          );
         }}
       >
         Logout

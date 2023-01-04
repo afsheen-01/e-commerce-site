@@ -10,9 +10,11 @@ export const Cart = (): ReactElement => {
 
   return (
     <PageWrap>
-      {cart.map((item: Product) => (
-        <ProductCard product={item} key={item.id} />
-      ))}
+      {cart &&
+        cart.map((item: Product) => (
+          <ProductCard product={item} key={item.id} />
+        ))}
+      Cart
     </PageWrap>
   );
 };

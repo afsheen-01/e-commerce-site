@@ -9,7 +9,7 @@ const useLoginUser = ({
 }: LoginBody): UseQueryResult<LoginBody, AxiosError> => {
   return useQuery<LoginBody, AxiosError>(
     "categories",
-    getProducts({ username, password }),
+    login({ username, password }),
     {
       retry: false,
       refetchOnWindowFocus: false,
@@ -18,7 +18,7 @@ const useLoginUser = ({
   );
 };
 
-const getProducts = ({ username, password }: LoginBody) => {
+const login = ({ username, password }: LoginBody) => {
   return async () => {
     const res = await ecommerceBaseURL.post<LoginBody>(
       `/auth/login`,

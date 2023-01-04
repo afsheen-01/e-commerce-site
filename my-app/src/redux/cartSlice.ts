@@ -19,18 +19,6 @@ const handleCartChange = (
   return state;
 };
 
-const changeCount = (
-  state: WritableDraft<Product[]>,
-  action: { payload: { id: number; quantity: number }; type: string }
-) => {
-  return (state = state.map((item) => {
-    if (item.id === action.payload.id) {
-      return { ...item, quantity: action.payload.quantity };
-    }
-    return item;
-  }));
-};
-
 export const cartReducer = createSlice({
   name: "cart",
   initialState,
@@ -38,14 +26,9 @@ export const cartReducer = createSlice({
     updateCart: (state, action) => {
       return handleCartChange(action, state);
     },
-    updateCount: (state, action) => {
-      return changeCount(state, action);
-    },
   },
 });
 
-export const { updateCart, updateCount } = cartReducer.actions;
-// export const setCartitems = (state: RootState) => state.cart;
-// export const;
+export const { updateCart } = cartReducer.actions;
 
 export default cartReducer.reducer;

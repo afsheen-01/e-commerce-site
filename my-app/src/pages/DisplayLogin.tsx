@@ -1,53 +1,13 @@
-import { AnyAction, Dispatch } from "@reduxjs/toolkit";
-import { SetStateAction } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 import { LoggedInCard } from "./LoggedInCard";
 import { LoginForm } from "./LoginForm";
 
-export const DisplayLogin = ({
-  isLoggedIn,
-  username,
-  loginName,
-  loginPassword,
-  name,
-  passwordFromSession,
-  password,
-  setUsername,
-  setPassword,
-  dispatch,
-}: {
-  isLoggedIn: boolean;
-  username: string;
-  loginName: string;
-  passwordFromSession: string;
-  password: string;
-  setUsername: React.Dispatch<SetStateAction<string>>;
-  setPassword: React.Dispatch<SetStateAction<string>>;
-  dispatch: Dispatch<AnyAction>;
-  name: string;
-  loginPassword: string;
-}) => {
-  if (isLoggedIn) {
-    return (
-      <LoggedInCard
-        username={username}
-        loginName={loginName}
-        passwordFromSession={passwordFromSession}
-        password={password}
-        setUsername={setUsername}
-        setPassword={setPassword}
-        dispatch={dispatch}
-      />
-    );
+export const DisplayLogin = () => {
+  const login = useSelector((state: RootState) => state.login);
+
+  if (login.isLoggedIn) {
+    return <LoggedInCard />;
   }
-  return (
-    <LoginForm
-      setUsername={setUsername}
-      name={name}
-      setPassword={setPassword}
-      password={password}
-      loginName={loginName}
-      loginPassword={loginPassword}
-      dispatch={dispatch}
-    />
-  );
+  return <LoginForm />;
 };

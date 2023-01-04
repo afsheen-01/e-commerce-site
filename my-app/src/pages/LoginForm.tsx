@@ -1,25 +1,22 @@
 import { FormControl, FormLabel, Flex, Input, Button } from "@chakra-ui/react";
-import { AnyAction, Dispatch } from "@reduxjs/toolkit";
-import { SetStateAction } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { updateCredentials } from "../redux/loginSlice";
+import { useSetLoginCreds } from "../utils/useSetSessionStorage";
 
-export const LoginForm = ({
-  setUsername,
-  name,
-  setPassword,
-  password,
-  loginName,
-  loginPassword,
-  dispatch,
-}: {
-  setUsername: React.Dispatch<SetStateAction<string>>;
-  name: string;
-  setPassword: React.Dispatch<SetStateAction<string>>;
-  password: string;
-  loginName: string;
-  loginPassword: string;
-  dispatch: Dispatch<AnyAction>;
-}) => {
+export const LoginForm = () => {
+  const [name, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [userId, setUserId] = useState<number>(0);
+  const dispatch = useDispatch();
+  const setLoginCreds = useSetLoginCreds();
+
+  useEffect(() => {
+    dispatch(updateCredentials({ username: name, password }));
+    setLoginCreds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [name, password]);
+
   return (
     <FormControl>
       <Flex alignItems="center" m={2}>
@@ -48,8 +45,14 @@ export const LoginForm = ({
         mt={4}
         type="submit"
         onClick={() => {
-          loginName.length && loginPassword.length
-            ? dispatch(updateCredentials({ isLoggedIn: true }))
+          setUserId(Math.random() * 100);
+          name.length && password.length
+            ? dispatch(
+                updateCredentials({
+                  isLoggedIn: true,
+                  userId: userId,
+                })
+              )
             : dispatch(updateCredentials({ isLoggedIn: false }));
         }}
       >

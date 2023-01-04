@@ -9,37 +9,13 @@ import {
   Image,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { updateCart, updateCount } from "../redux/cartSlice";
-import { RootState } from "../redux/store";
 import { Product } from "../types";
-import { useSetCartDetails } from "../utils/useSetSessionStorage";
 import { ProductModal } from "./ProductModal";
 import { QuantityButtons } from "./QuantityButtons";
 
 export const ProductCard = ({ product }: { product: Product }) => {
-  const [quantity, setQuantity] = useState<number>(product.quantity || 0);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cart = useSelector((state: RootState) => state.cart);
-  const dispatch = useDispatch();
-  const addToSessionStorage = useSetCartDetails();
 
-  useEffect(() => {
-    const isItemInCart = cart.find((item) => item.id === product.id);
-
-    if (isItemInCart) {
-      dispatch(updateCount({ id: product.id, quantity }));
-      dispatch(updateCart({ ...product, quantity }));
-      addToSessionStorage();
-    }
-    if (!isItemInCart && quantity > 0) {
-      dispatch(updateCart({ ...product, quantity }));
-      addToSessionStorage();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product, quantity]);
   return (
     <>
       <Card
@@ -74,16 +50,10 @@ export const ProductCard = ({ product }: { product: Product }) => {
           <Text as="b" fontSize="md" mx={2}>
             Add to Cart:
           </Text>
-          <QuantityButtons setQuantity={setQuantity} quantity={quantity} />
+          <QuantityButtons productId={product.id} />
         </CardFooter>
       </Card>
-      <ProductModal
-        isOpen={isOpen}
-        onClose={onClose}
-        product={product}
-        setQuantity={setQuantity}
-        quantity={quantity}
-      />
+      <ProductModal isOpen={isOpen} onClose={onClose} product={product} />
     </>
   );
 };

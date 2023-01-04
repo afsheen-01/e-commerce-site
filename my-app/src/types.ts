@@ -21,9 +21,21 @@ export type LoginResponse = { token: string };
 
 // Redux states
 export type UserState = {
+  userId: number;
   username: string;
   password: string;
   isLoggedIn: boolean;
+};
+
+export type CartProduct = {
+  productId: number;
+  quantity: number;
+};
+
+export type CartProducts = {
+  userId: number;
+  date: string;
+  products: Array<CartProduct>;
 };
 
 export type AllStates = {

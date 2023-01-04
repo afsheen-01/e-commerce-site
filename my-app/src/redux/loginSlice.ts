@@ -6,12 +6,14 @@ import { RootState } from "./store";
 const initialState = {
   username: "",
   password: "",
+  userId: 0,
   isLoggedIn: false,
 };
 
 const setUserCredentials = (
   action: { payload: UserState; type: string },
   state: WritableDraft<{
+    userId: number;
     username: string;
     password: string;
     isLoggedIn: boolean;

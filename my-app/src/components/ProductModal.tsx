@@ -18,14 +18,10 @@ export const ProductModal = ({
   isOpen,
   onClose,
   product,
-  setQuantity,
-  quantity,
 }: {
   isOpen: boolean;
   onClose: () => void;
   product: Product;
-  setQuantity: React.Dispatch<React.SetStateAction<number>>;
-  quantity: number;
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -48,7 +44,7 @@ export const ProductModal = ({
               <Text as="b" fontSize="md">
                 Add to Cart:
               </Text>
-              <QuantityButtons setQuantity={setQuantity} quantity={quantity} />
+              <QuantityButtons productId={product.id} />
             </Box>
           </Box>
         </ModalBody>
