@@ -1,15 +1,19 @@
 import { Heading, ButtonGroup, HStack, IconButton } from "@chakra-ui/react";
+import { useMemo } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { increaseQuantity, decreaseQuantity } from "../redux/quantitySlice";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 
 export const QuantityButtons = ({ productId }: { productId: number }) => {
-  const productInCart = useSelector((state: RootState) => state.count);
-  console.log({ productInCart });
-  const currentProduct = productInCart.find(
-    (item) => item.productId === productId
+  const dispatch = useAppDispatch();
+
+  const products = useAppSelector((state) => state.cart);
+
+  const product = products.find(
+    useMemo(() => (product) => product.productId === productId, [productId])
   );
-  console.log(currentProduct);
+  const quantity = useMemo(() => product?.quantity || 0, [product]);
+
   return (
     <ButtonGroup as={HStack} spacing="2">
       <IconButton
@@ -20,10 +24,12 @@ export const QuantityButtons = ({ productId }: { productId: number }) => {
         height={7}
         icon={<FaMinus />}
         aria-label={"decrease-items"}
-        // onClick={() => setQuantity(quantity > 0 ? quantity - 1 : 0)}
+        onClick={() => {
+          dispatch(decreaseQuantity({ productId }));
+        }}
       />
 
-      <Heading size="md">value</Heading>
+      <Heading size="md">{quantity}</Heading>
       <IconButton
         bgColor="primary.asBg"
         _hover={{ bg: "#DA2F7161" }}
@@ -32,9 +38,9 @@ export const QuantityButtons = ({ productId }: { productId: number }) => {
         height={7}
         icon={<FaPlus />}
         aria-label={"add-item"}
-        // onClick={() => {
-        //   setQuantity(quantity + 1);
-        // }}
+        onClick={() => {
+          dispatch(increaseQuantity({ productId }));
+        }}
       />
     </ButtonGroup>
   );

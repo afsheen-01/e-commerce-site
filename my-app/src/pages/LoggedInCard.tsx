@@ -1,12 +1,11 @@
 import { Button, Text, Stack } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
 import { updateCredentials } from "../redux/loginSlice";
-import { RootState } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 
 export const LoggedInCard = () => {
-  const login = useSelector((state: RootState) => state.login);
+  const login = useAppSelector((state) => state.login);
   const { username, password } = login;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Stack>

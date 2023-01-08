@@ -1,21 +1,32 @@
 import { FormControl, FormLabel, Flex, Input, Button } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import useLoginUser from "../hooks/useLoginUser";
 import { updateCredentials } from "../redux/loginSlice";
-import { useSetLoginCreds } from "../utils/useSetSessionStorage";
+import { useAppDispatch } from "../redux/store";
 
 export const LoginForm = () => {
-  const [name, setUsername] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userId, setUserId] = useState<number>(0);
-  const dispatch = useDispatch();
-  const setLoginCreds = useSetLoginCreds();
+  const dispatch = useAppDispatch();
+  const { mutate } = useLoginUser();
 
-  useEffect(() => {
-    dispatch(updateCredentials({ username: name, password }));
-    setLoginCreds();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name, password]);
+  const handleLogin = () => {
+    setUserId(Math.random() * 100);
+    if (username.length && password.length) {
+      dispatch(
+        updateCredentials({
+          username,
+          password,
+          isLoggedIn: true,
+          userId: userId,
+        })
+      );
+      mutate({ username, password });
+    } else {
+      dispatch(updateCredentials({ isLoggedIn: false }));
+    }
+  };
 
   return (
     <FormControl>
@@ -25,7 +36,7 @@ export const LoginForm = () => {
           placeholder="John Doe"
           color="gray.70"
           onChange={(e) => setUsername(e.target.value)}
-          value={name}
+          value={username}
         />
       </Flex>
       <Flex alignItems="center" m={2}>
@@ -44,17 +55,7 @@ export const LoginForm = () => {
         w="100%"
         mt={4}
         type="submit"
-        onClick={() => {
-          setUserId(Math.random() * 100);
-          name.length && password.length
-            ? dispatch(
-                updateCredentials({
-                  isLoggedIn: true,
-                  userId: userId,
-                })
-              )
-            : dispatch(updateCredentials({ isLoggedIn: false }));
-        }}
+        onClick={handleLogin}
       >
         Submit
       </Button>

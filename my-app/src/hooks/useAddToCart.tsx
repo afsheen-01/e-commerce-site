@@ -1,33 +1,20 @@
-import { AxiosError } from "axios";
-import { useQuery, UseQueryResult } from "react-query";
-import { LoginBody } from "../types";
+import { useMutation } from "react-query";
+import { useAppSelector } from "../redux/store";
+import { CartProducts } from "../types";
 import { ecommerceBaseURL } from "../utils/baseURL";
 
-// const useAddToCart = ({
-//  userId,
-//  date,
-//  products =
-// }): UseQueryResult<LoginBody, AxiosError> => {
-//   return useQuery<LoginBody, AxiosError>(
-//     "categories",
-//     addCart({ username, password }),
-//     {
-//       retry: false,
-//       refetchOnWindowFocus: false,
-//       refetchOnMount: false,
-//     }
-//   );
-// };
+const useAddToCart = () => {
+  const { userId } = useAppSelector((state) => state.login);
+  const cart = useAppSelector((state) => state.cart);
+  return useMutation(() =>
+    addCart({ userId, date: new Date().toLocaleDateString(), products: cart })
+  );
+};
 
-// const addCart = ({ username, password }: LoginBody) => {
-//   return async () => {
-//     const res = await ecommerceBaseURL.post<LoginBody>(
-//       `/auth/login`,
-//       JSON.stringify({ username, password })
-//     );
-//     console.log(res);
-//     return res.data;
-//   };
-// };
+const addCart = async (prepareCart: CartProducts) => {
+  const res = await ecommerceBaseURL.post("/carts", prepareCart);
 
-// export default useAddToCart;
+  return res.data;
+};
+
+export default useAddToCart;

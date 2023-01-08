@@ -1,32 +1,17 @@
-import { AxiosError } from "axios";
-import { useQuery, UseQueryResult } from "react-query";
+import { useMutation } from "react-query";
 import { LoginBody } from "../types";
 import { ecommerceBaseURL } from "../utils/baseURL";
 
-const useLoginUser = ({
-  username,
-  password,
-}: LoginBody): UseQueryResult<LoginBody, AxiosError> => {
-  return useQuery<LoginBody, AxiosError>(
-    "categories",
-    login({ username, password }),
-    {
-      retry: false,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    }
-  );
+export const useLoginUser = () => {
+  return useMutation(login);
 };
 
-const login = ({ username, password }: LoginBody) => {
-  return async () => {
-    const res = await ecommerceBaseURL.post<LoginBody>(
-      `/auth/login`,
-      JSON.stringify({ username, password })
-    );
-    console.log(res);
-    return res.data;
-  };
+const login = async ({ username, password }: LoginBody) => {
+  const requestBody = { username, password };
+  console.log(requestBody);
+  const res = await ecommerceBaseURL.post("/auth/login/", requestBody);
+  console.log(res);
+  return res.data;
 };
 
 export default useLoginUser;

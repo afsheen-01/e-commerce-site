@@ -2,6 +2,7 @@ export const parseJSON = (key: string) => {
   const getItemFromSession = sessionStorage.getItem(key) || "";
   console.log(getItemFromSession);
   if (getItemFromSession) {
+    console.log(getItemFromSession);
     return JSON.parse(getItemFromSession);
   }
 
