@@ -26,8 +26,8 @@ export const ProductModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{product.title}</ModalHeader>
+      <ModalContent maxW="60%" maxH="70%">
+        <ModalHeader p={8}>{product.title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6} maxW="1000px" as={SimpleGrid} columns={2} spacing={5}>
           <Image
@@ -44,7 +44,7 @@ export const ProductModal = ({
               <Text as="b" fontSize="md">
                 Add to Cart:
               </Text>
-              <QuantityButtons productId={product.id} />
+              <QuantityButtons productId={product.id} m={3} />
             </Box>
           </Box>
         </ModalBody>

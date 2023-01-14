@@ -8,9 +8,7 @@ export const useLoginUser = () => {
 
 const login = async ({ username, password }: LoginBody) => {
   const requestBody = { username, password };
-  console.log(requestBody);
   const res = await ecommerceBaseURL.post("/auth/login/", requestBody);
-  console.log(res);
   return res.data;
 };
 

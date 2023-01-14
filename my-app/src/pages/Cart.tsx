@@ -9,7 +9,11 @@ import { Product } from "../types";
 
 export const Cart = (): ReactElement => {
   const { data: allProducts } = useGetProducts();
-  const { mutate, data: afterAddingCart } = useAddToCart();
+  const { mutate } = useAddToCart({
+    onSuccess: (data) => {
+      return data;
+    },
+  });
   const cart = useAppSelector((state) => state.cart);
 
   const cartToDisplay = allProducts
@@ -21,11 +25,6 @@ export const Cart = (): ReactElement => {
         quantity: item ? item.quantity : 0,
       };
     });
-
-  const handleCheckout = () => {
-    mutate();
-  };
-  console.log(afterAddingCart);
 
   return (
     <PageWrap>
@@ -40,7 +39,7 @@ export const Cart = (): ReactElement => {
         size="sm"
         height={7}
         aria-label={"add-item"}
-        onClick={handleCheckout}
+        onClick={() => mutate()}
       >
         Checkout
       </Button>
