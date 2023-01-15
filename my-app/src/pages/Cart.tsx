@@ -1,21 +1,21 @@
 import { Button } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { PageWrap } from "../components/PageWrap";
-import { ProductCard } from "../components/ProductCard";
 import useAddToCart from "../hooks/useAddToCart";
 import useGetProducts from "../hooks/useGetProducts";
 import { useAppSelector } from "../redux/store";
 import { CartProduct, Product, ProductResponse } from "../types";
 import { useNavigate } from "react-router-dom";
 import { HorizontalCard } from "../components/HorizontalCard";
+import { CustomSpinner } from "../components/CustomSpinner";
 
 export const Cart = (): ReactElement => {
-  const { data: allProducts } = useGetProducts();
+  const { data: allProducts, isLoading: productsIsLoading } = useGetProducts();
   const cart = useAppSelector((state) => state.cart);
   const cartToDisplay = transformProductsToDisplay(allProducts || [], cart);
 
   const navigate = useNavigate();
-  const { mutate } = useAddToCart({
+  const { mutate, isLoading: cartIsLoading } = useAddToCart({
     onSuccess: (data) => {
       navigate("/summary", {
         state: {
@@ -32,6 +32,10 @@ export const Cart = (): ReactElement => {
     },
   });
 
+  if (productsIsLoading || cartIsLoading) {
+    return <CustomSpinner />;
+  }
+
   return (
     <PageWrap>
       {cartToDisplay &&
@@ -47,7 +51,7 @@ export const Cart = (): ReactElement => {
         aria-label={"add-item"}
         onClick={() => mutate()}
       >
-        Checkout
+        {cartIsLoading ? <CustomSpinner /> : "Checkout"}
       </Button>
     </PageWrap>
   );

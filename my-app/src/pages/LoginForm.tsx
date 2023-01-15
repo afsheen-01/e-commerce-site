@@ -1,5 +1,6 @@
 import { FormControl, FormLabel, Flex, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
+import { CustomSpinner } from "../components/CustomSpinner";
 import useLoginUser from "../hooks/useLoginUser";
 import { updateCredentials } from "../redux/loginSlice";
 import { useAppDispatch } from "../redux/store";
@@ -9,7 +10,7 @@ export const LoginForm = () => {
   const [password, setPassword] = useState<string>("");
   const [userId, setUserId] = useState<number>(0);
   const dispatch = useAppDispatch();
-  const { mutate } = useLoginUser();
+  const { mutate, isLoading } = useLoginUser();
 
   const handleLogin = () => {
     setUserId(Math.random() * 100);
@@ -57,7 +58,7 @@ export const LoginForm = () => {
         type="submit"
         onClick={handleLogin}
       >
-        Submit
+        {isLoading ? <CustomSpinner /> : "Submit"}
       </Button>
     </FormControl>
   );

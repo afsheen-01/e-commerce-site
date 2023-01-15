@@ -3,9 +3,14 @@ import { ReactElement } from "react";
 import useGetProducts from "../hooks/useGetProducts";
 import { ProductCard } from "../components/ProductCard";
 import { PageWrap } from "../components/PageWrap";
+import { CustomSpinner } from "../components/CustomSpinner";
 
 export const Home = (): ReactElement => {
-  const { data } = useGetProducts();
+  const { data, isLoading } = useGetProducts();
+
+  if (isLoading) {
+    return <CustomSpinner />;
+  }
 
   return (
     <PageWrap>

@@ -4,12 +4,14 @@ import { PageWrap } from "../components/PageWrap";
 import { ProductCard } from "../components/ProductCard";
 import useGetProducts from "../hooks/useGetProducts";
 import useGetCategories from "../hooks/useGetCategories";
+import { CustomSpinner } from "../components/CustomSpinner";
 
 export const Products = (): ReactElement => {
   const [category, setCategory] = useState<string>("");
 
-  const { data: categories } = useGetCategories();
-  const { data: products } = useGetProducts();
+  const { data: categories, isLoading: categoriesIsLoading } =
+    useGetCategories();
+  const { data: products, isLoading: productsIsLoading } = useGetProducts();
 
   const filteredData = () => {
     if (category) {
@@ -18,10 +20,14 @@ export const Products = (): ReactElement => {
     return products;
   };
 
+  if (categoriesIsLoading || productsIsLoading) {
+    return <CustomSpinner />;
+  }
+
   return (
     <PageWrap>
       <Flex>
-        <Stack minW="15%" bgColor="gray.10" p={6}>
+        <Stack minW="15%" bgColor="primary.asBg" p={6}>
           <Text as="b">FilterBy:</Text>
           {categories?.map((category, index) => {
             return (
