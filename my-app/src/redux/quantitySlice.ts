@@ -27,9 +27,13 @@ export const quantityReducer = createSlice({
       }
       return state;
     },
+    clearCart: (state, action) => {
+      return (state = action.payload);
+    },
   },
 });
 
-export const { increaseQuantity, decreaseQuantity } = quantityReducer.actions;
+export const { increaseQuantity, decreaseQuantity, clearCart } =
+  quantityReducer.actions;
 
 export default quantityReducer.reducer;

@@ -39,7 +39,7 @@ export const QuantityButtons = ({
         size="sm"
         height={7}
         icon={<FaPlus />}
-        aria-label={"add-item"}
+        aria-label={"increase-item"}
         onClick={() => dispatch(increaseQuantity({ productId }))}
       />
     </ButtonGroup>
