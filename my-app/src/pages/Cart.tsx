@@ -7,6 +7,7 @@ import useGetProducts from "../hooks/useGetProducts";
 import { useAppSelector } from "../redux/store";
 import { CartProduct, Product, ProductResponse } from "../types";
 import { useNavigate } from "react-router-dom";
+import { HorizontalCard } from "../components/HorizontalCard";
 
 export const Cart = (): ReactElement => {
   const { data: allProducts } = useGetProducts();
@@ -26,13 +27,16 @@ export const Cart = (): ReactElement => {
         },
       });
     },
+    onError: () => {
+      console.log(Error);
+    },
   });
 
   return (
     <PageWrap>
       {cartToDisplay &&
         cartToDisplay.map((item: Product) => (
-          <ProductCard product={item} key={item.id} />
+          <HorizontalCard product={item} showQuantity={true} />
         ))}
       <Button
         bgColor="primary.asBg"

@@ -18,10 +18,12 @@ export const ProductModal = ({
   isOpen,
   onClose,
   product,
+  showQuantity = true,
 }: {
   isOpen: boolean;
   onClose: () => void;
   product: Product;
+  showQuantity?: boolean;
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -40,12 +42,14 @@ export const ProductModal = ({
               Description:
             </Text>
             <Text>{product.description}</Text>
-            <Box as={Flex} alignItems="center">
-              <Text as="b" fontSize="md">
-                Add to Cart:
-              </Text>
-              <QuantityButtons productId={product.id} m={3} />
-            </Box>
+            {showQuantity && (
+              <Box as={Flex} alignItems="center">
+                <Text as="b" fontSize="md">
+                  Add to Cart:
+                </Text>
+                <QuantityButtons productId={product.id} m={3} />
+              </Box>
+            )}
           </Box>
         </ModalBody>
       </ModalContent>
