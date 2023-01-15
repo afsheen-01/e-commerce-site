@@ -9,25 +9,24 @@ import { CartProducts } from "../types";
 import { ecommerceBaseURL } from "../utils/baseURL";
 
 const useAddToCart = (
-  options?: UseMutationOptions<CartProducts, AxiosError, CartProducts>
-): UseMutationResult<CartProducts, AxiosError, CartProducts> => {
+  options?: UseMutationOptions<CartProducts, AxiosError, void>
+): UseMutationResult<CartProducts, AxiosError, void> => {
   const { userId } = useAppSelector((state) => state.login);
   const cart = useAppSelector((state) => state.cart);
   return useMutation(
-    () =>
-      addCart({
-        userId,
-        date: new Date().toLocaleDateString(),
-        products: cart,
-      }),
+    addCart({
+      userId,
+      date: new Date().toLocaleDateString(),
+      products: cart,
+    }),
     options
   );
 };
 
-const addCart = async (prepareCart: CartProducts) => {
-  const res = await ecommerceBaseURL.post("/carts", prepareCart);
-
-  return res.data;
-};
+const addCart =
+  (prepareCart?: CartProducts) => async (): Promise<CartProducts> => {
+    const res = await ecommerceBaseURL.post("/carts", prepareCart);
+    return res.data;
+  };
 
 export default useAddToCart;

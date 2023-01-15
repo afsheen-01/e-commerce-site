@@ -5,26 +5,28 @@ import { ProductCard } from "../components/ProductCard";
 import useAddToCart from "../hooks/useAddToCart";
 import useGetProducts from "../hooks/useGetProducts";
 import { useAppSelector } from "../redux/store";
-import { Product } from "../types";
+import { CartProduct, Product, ProductResponse } from "../types";
+import { useNavigate } from "react-router-dom";
 
 export const Cart = (): ReactElement => {
   const { data: allProducts } = useGetProducts();
+  const cart = useAppSelector((state) => state.cart);
+  const cartToDisplay = transformProductsToDisplay(allProducts || [], cart);
+
+  const navigate = useNavigate();
   const { mutate } = useAddToCart({
     onSuccess: (data) => {
-      return data;
+      navigate("/summary", {
+        state: {
+          ...data,
+          products: transformProductsToDisplay(
+            allProducts || [],
+            data.products
+          ),
+        },
+      });
     },
   });
-  const cart = useAppSelector((state) => state.cart);
-
-  const cartToDisplay = allProducts
-    ?.filter((product) => cart.some((item) => item.productId === product.id))
-    .map((product) => {
-      const item = cart.find((item) => item.productId === product.id);
-      return {
-        ...product,
-        quantity: item ? item.quantity : 0,
-      };
-    });
 
   return (
     <PageWrap>
@@ -45,4 +47,23 @@ export const Cart = (): ReactElement => {
       </Button>
     </PageWrap>
   );
+};
+
+const transformProductsToDisplay = (
+  filterFrom: ProductResponse,
+  filterWith: CartProduct[]
+) => {
+  return filterFrom
+    ?.filter((product) =>
+      filterWith.some((item: CartProduct) => item.productId === product.id)
+    )
+    .map((product) => {
+      const item = filterWith.find(
+        (item: CartProduct) => item.productId === product.id
+      );
+      return {
+        ...product,
+        quantity: item ? item.quantity : 0,
+      };
+    });
 };

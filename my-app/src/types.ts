@@ -1,5 +1,3 @@
-//Request and response
-
 export type Product = {
   category: string;
   description: string;
@@ -19,7 +17,6 @@ export type Categories = Array<string>;
 export type LoginBody = { username: string; password: string };
 export type LoginResponse = { token: string };
 
-// Redux states
 export type UserState = {
   userId: number;
   username: string;
@@ -36,15 +33,4 @@ export type CartProducts = {
   userId: number;
   date: string;
   products: Array<CartProduct>;
-};
-
-export type AllStates = {
-  LOGIN: {
-    type: "LOGIN";
-    payload: { username: string; password: string; isLoggedIn: true };
-  };
-  LOGOUT: {
-    type: "LOGOUT";
-    payload: { username: string; password: string; isLoggedIn: false };
-  };
 };
