@@ -40,7 +40,7 @@ export const Cart = (): ReactElement => {
     <PageWrap>
       {cartToDisplay &&
         cartToDisplay.map((item: Product) => (
-          <HorizontalCard product={item} showQuantity={true} />
+          <HorizontalCard product={item} key={item.id} showQuantity={true} />
         ))}
       <Button
         bgColor="primary.asBg"
@@ -59,14 +59,14 @@ export const Cart = (): ReactElement => {
 
 const transformProductsToDisplay = (
   filterFrom: ProductResponse,
-  filterWith: CartProduct[]
+  filterBy: CartProduct[]
 ) => {
   return filterFrom
     ?.filter((product) =>
-      filterWith.some((item: CartProduct) => item.productId === product.id)
+      filterBy.some((item: CartProduct) => item.productId === product.id)
     )
     .map((product) => {
-      const item = filterWith.find(
+      const item = filterBy.find(
         (item: CartProduct) => item.productId === product.id
       );
       return {

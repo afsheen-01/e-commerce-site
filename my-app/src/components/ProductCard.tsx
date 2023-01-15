@@ -18,11 +18,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
 
   return (
     <>
-      <Card
-        borderRadius="7px"
-        boxShadow={"0 1px 3px 0 rgba(0, 0, 0, 0.6)"}
-        key={product.id}
-      >
+      <Card borderRadius="7px" key={product.id}>
         <CardBody as={VStack} cursor="pointer" onClick={onOpen}>
           <Image
             src={product.image || ""}
