@@ -28,9 +28,7 @@ export const QuantityButtons = ({
         height={7}
         icon={<FaMinus />}
         aria-label={"decrease-items"}
-        onClick={() => {
-          dispatch(decreaseQuantity({ productId }));
-        }}
+        onClick={() => dispatch(decreaseQuantity({ productId }))}
       />
 
       <Heading size="md">{quantity}</Heading>
@@ -42,9 +40,7 @@ export const QuantityButtons = ({
         height={7}
         icon={<FaPlus />}
         aria-label={"add-item"}
-        onClick={() => {
-          dispatch(increaseQuantity({ productId }));
-        }}
+        onClick={() => dispatch(increaseQuantity({ productId }))}
       />
     </ButtonGroup>
   );

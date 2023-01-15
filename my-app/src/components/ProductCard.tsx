@@ -2,14 +2,14 @@ import {
   Card,
   CardBody,
   CardFooter,
-  Heading,
-  Stack,
   Text,
   VStack,
   Image,
   useDisclosure,
+  Flex,
 } from "@chakra-ui/react";
 import { Product } from "../types";
+import { ProductInfo } from "./ProductInfo";
 import { ProductModal } from "./ProductModal";
 import { QuantityButtons } from "./QuantityButtons";
 
@@ -25,29 +25,19 @@ export const ProductCard = ({ product }: { product: Product }) => {
             objectFit="contain"
             boxSize="250px"
           />
-          <Stack mt="6" spacing="3">
-            <Heading
-              size="md"
-              fontFamily="heading"
-              maxW="200px"
-              overflow="hidden"
-              whiteSpace="nowrap"
-              textOverflow="ellipsis"
-              color="gray.70"
-            >
-              {product.title}
-            </Heading>
-            <Text noOfLines={5} color="gray.70">
-              {product.description}
-            </Text>
-          </Stack>
+          <ProductInfo
+            product={product}
+            showQuantity={true}
+            forComponent="card"
+          />
         </CardBody>
-        <CardFooter alignItems="center">
-          <Text as="b" fontSize="md" mx={2}>
+        <Flex mx={3}>
+          <Text fontWeight="semibold" fontSize="md" mx={2}>
             Add to Cart:
           </Text>
           <QuantityButtons productId={product.id} />
-        </CardFooter>
+        </Flex>
+        <CardFooter />
       </Card>
       <ProductModal isOpen={isOpen} onClose={onClose} product={product} />
     </>

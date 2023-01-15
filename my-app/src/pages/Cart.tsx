@@ -8,6 +8,7 @@ import { CartProduct, Product, ProductResponse } from "../types";
 import { useNavigate } from "react-router-dom";
 import { HorizontalCard } from "../components/HorizontalCard";
 import { CustomSpinner } from "../components/CustomSpinner";
+import { PageHeading } from "../components/PageHeading";
 
 export const Cart = (): ReactElement => {
   const { data: allProducts, isLoading: productsIsLoading } = useGetProducts();
@@ -38,6 +39,7 @@ export const Cart = (): ReactElement => {
 
   return (
     <PageWrap>
+      <PageHeading title="Cart" />
       {cartToDisplay &&
         cartToDisplay.map((item: Product) => (
           <HorizontalCard product={item} key={item.id} showQuantity={true} />
