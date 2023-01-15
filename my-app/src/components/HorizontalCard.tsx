@@ -1,14 +1,14 @@
 import {
   Card,
   CardBody,
-  CardFooter,
-  Heading,
   Stack,
-  Text,
   Image,
   useDisclosure,
+  Flex,
+  Text,
 } from "@chakra-ui/react";
 import { Product } from "../types";
+import { ProductInfo } from "./ProductInfo";
 import { ProductModal } from "./ProductModal";
 import { QuantityButtons } from "./QuantityButtons";
 
@@ -31,23 +31,34 @@ export const HorizontalCard = ({
         cursor="pointer"
       >
         <Image
-          objectFit="cover"
-          maxW={{ base: "100%", sm: "200px" }}
+          objectFit="contain"
+          boxSize="200px"
+          m={4}
           src={product.image}
           alt={product.title}
         />
 
-        <Stack>
-          <CardBody>
-            <Heading size="md">{product.title}</Heading>
-
-            <Text py="2">{product.description}</Text>
+        <Stack justifyContent="start">
+          <CardBody maxH="53%">
+            <ProductInfo
+              product={product}
+              showQuantity={showQuantity}
+              forComponent="card"
+            />
           </CardBody>
 
           {showQuantity && (
-            <CardFooter>
+            <Flex>
+              <Text
+                fontWeight="semibold"
+                fontSize="md"
+                marginRight={2}
+                marginLeft={5}
+              >
+                Add to Cart:
+              </Text>
               <QuantityButtons productId={product.id} />
-            </CardFooter>
+            </Flex>
           )}
         </Stack>
       </Card>

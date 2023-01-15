@@ -6,11 +6,9 @@ import { Header } from "./Header";
 export const PageWrap = ({
   children,
   ...rest
-}:
-  | {
-      children: ReactElement;
-    }
-  | BoxProps): ReactElement => {
+}: {
+  children: ReactElement;
+} & BoxProps): ReactElement => {
   return (
     <VStack align="stretch">
       <Header />

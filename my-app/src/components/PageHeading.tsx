@@ -7,7 +7,7 @@ export const PageHeading = ({
 }: { title: string; subtitle?: string } & BoxProps) => {
   return (
     <Box {...props}>
-      <Heading as="h2" fontWeight="medium" size="md">
+      <Heading as="h2" fontWeight="semibold" fontSize="24">
         {title}
       </Heading>
       {subtitle?.length && (

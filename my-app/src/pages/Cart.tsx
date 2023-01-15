@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { PageWrap } from "../components/PageWrap";
 import useAddToCart from "../hooks/useAddToCart";
@@ -11,7 +11,7 @@ import { CustomSpinner } from "../components/CustomSpinner";
 import { PageHeading } from "../components/PageHeading";
 
 export const Cart = (): ReactElement => {
-  const { data: allProducts, isLoading: productsIsLoading } = useGetProducts();
+  const { data: allProducts } = useGetProducts();
   const cart = useAppSelector((state) => state.cart);
   const cartToDisplay = transformProductsToDisplay(allProducts || [], cart);
 
@@ -33,18 +33,27 @@ export const Cart = (): ReactElement => {
     },
   });
 
-  if (productsIsLoading || cartIsLoading) {
+  if (cartIsLoading) {
     return <CustomSpinner />;
   }
 
   return (
     <PageWrap>
-      <PageHeading title="Cart" />
-      {cartToDisplay &&
-        cartToDisplay.map((item: Product) => (
-          <HorizontalCard product={item} key={item.id} showQuantity={true} />
-        ))}
-      <Button
+      <Box mx={5}>
+        <PageHeading title="Cart" marginBottom={3} />
+        <VStack w="60%" spacing={6} alignItems="start">
+          {cartToDisplay &&
+            cartToDisplay.map((item: Product) => (
+              <HorizontalCard
+                product={item}
+                key={item.id}
+                showQuantity={true}
+              />
+            ))}
+        </VStack>
+      </Box>
+
+      {/* <Button
         bgColor="primary.asBg"
         _hover={{ bg: "#DA2F7161" }}
         color="primary.100"
@@ -54,7 +63,7 @@ export const Cart = (): ReactElement => {
         onClick={() => mutate()}
       >
         {cartIsLoading ? <CustomSpinner /> : "Checkout"}
-      </Button>
+      </Button> */}
     </PageWrap>
   );
 };
