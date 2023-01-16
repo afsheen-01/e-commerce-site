@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { PageWrap } from "../components/PageWrap";
-import { DisplayLogin } from "./DisplayLogin";
+import { DisplayLogin } from "../components/login/DisplayLogin";
 
 export const Login = (): ReactElement => {
   return (

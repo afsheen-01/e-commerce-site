@@ -1,13 +1,13 @@
 import { Box, HStack } from "@chakra-ui/react";
-import useAddToCart from "../hooks/useAddToCart";
-import useGetProducts from "../hooks/useGetProducts";
-import { useAppSelector } from "../redux/store";
+import useAddToCart from "../../hooks/useAddToCart";
+import useGetProducts from "../../hooks/useGetProducts";
+import { useAppSelector } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
-import { CustomSpinner } from "../components/CustomSpinner";
-import { OrderSummary } from "./OrderSummary";
+import { CustomSpinner } from "../CustomSpinner";
+import { OrderSummary } from "../summary/OrderSummary";
 import { DisplayCart } from "./DisplayCart";
 import { EmptyCart } from "./EmptyCart";
-import { transformProductsToDisplay } from "./Cart";
+import { transformProductsToDisplay } from "../../pages/Cart";
 
 export const CartBody = () => {
   const { data: allProducts } = useGetProducts();

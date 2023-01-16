@@ -1,5 +1,5 @@
 import { Text, Box, Flex, Heading, VStack } from "@chakra-ui/react";
-import { Product } from "../types";
+import { Product } from "../../types";
 import { QuantityButtons } from "./QuantityButtons";
 
 export const ProductInfo = ({

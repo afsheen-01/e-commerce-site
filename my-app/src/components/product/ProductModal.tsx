@@ -7,7 +7,7 @@ import {
   ModalBody,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { Product } from "../types";
+import { Product } from "../../types";
 import { ProductInfo } from "./ProductInfo";
 
 export const ProductModal = ({

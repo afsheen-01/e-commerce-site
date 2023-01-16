@@ -8,11 +8,11 @@ import {
   Divider,
   BoxProps,
 } from "@chakra-ui/react";
-import { useAppDispatch } from "../redux/store";
-import { Product } from "../types";
-import { CustomSpinner } from "../components/CustomSpinner";
-import { PageHeading } from "../components/PageHeading";
-import { clearCart } from "../redux/quantitySlice";
+import { useAppDispatch } from "../../redux/store";
+import { Product } from "../../types";
+import { CustomSpinner } from "../CustomSpinner";
+import { PageHeading } from "../PageHeading";
+import { clearCart } from "../../redux/quantitySlice";
 
 export const OrderSummary = ({
   cartToDisplay,

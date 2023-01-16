@@ -1,7 +1,7 @@
 import { Flex, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { ReactElement, useState } from "react";
 import { PageWrap } from "../components/PageWrap";
-import { ProductCard } from "../components/ProductCard";
+import { VerticalCard } from "../components/cards/VerticalCard";
 import useGetProducts from "../hooks/useGetProducts";
 import useGetCategories from "../hooks/useGetCategories";
 import { CustomSpinner } from "../components/CustomSpinner";
@@ -44,7 +44,7 @@ export const Products = (): ReactElement => {
         <SimpleGrid columns={[1, null, 3]} m={5} spacing={7}>
           {filteredData()?.map(
             (product): ReactElement => (
-              <ProductCard key={`product-${product.id}`} product={product} />
+              <VerticalCard key={`product-${product.id}`} product={product} />
             )
           )}
         </SimpleGrid>

@@ -1,7 +1,7 @@
 import { VStack } from "@chakra-ui/react";
-import { Product } from "../types";
-import { HorizontalCard } from "../components/HorizontalCard";
-import { PageHeading } from "../components/PageHeading";
+import { Product } from "../../types";
+import { HorizontalCard } from "../cards/HorizontalCard";
+import { PageHeading } from "../PageHeading";
 
 export const DisplayCart = ({
   cartToDisplay,

@@ -7,10 +7,10 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import { Product } from "../types";
-import { ProductInfo } from "./ProductInfo";
-import { ProductModal } from "./ProductModal";
-import { QuantityButtons } from "./QuantityButtons";
+import { Product } from "../../types";
+import { ProductInfo } from "../product/ProductInfo";
+import { ProductModal } from "../product/ProductModal";
+import { QuantityButtons } from "../product/QuantityButtons";
 
 export const HorizontalCard = ({
   product,

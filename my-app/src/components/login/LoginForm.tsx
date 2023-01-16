@@ -1,9 +1,9 @@
 import { FormControl, FormLabel, Flex, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
-import { CustomSpinner } from "../components/CustomSpinner";
-import useLoginUser from "../hooks/useLoginUser";
-import { updateCredentials } from "../redux/loginSlice";
-import { useAppDispatch } from "../redux/store";
+import { CustomSpinner } from "../CustomSpinner";
+import useLoginUser from "../../hooks/useLoginUser";
+import { updateCredentials } from "../../redux/loginSlice";
+import { useAppDispatch } from "../../redux/store";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState<string>("");

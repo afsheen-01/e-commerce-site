@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { useLocation } from "react-router-dom";
 
-import { PageWrap } from "../components/PageWrap";
+import { PageWrap } from "../PageWrap";
 import { OrderSummary } from "./OrderSummary";
 
 export const OrderSuccess = (): ReactElement => {

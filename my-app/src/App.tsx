@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Cart } from "./pages/Cart";
 import { Login } from "./pages/Login";
-import { OrderSuccess } from "./pages/OrderSuccess";
+import { OrderSuccess } from "./components/summary/OrderSuccess";
 import { Products } from "./pages/Products";
 import { Home } from "./pages/Home";
 import { QueryClient, QueryClientProvider } from "react-query";

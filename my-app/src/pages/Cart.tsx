@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { PageWrap } from "../components/PageWrap";
 import { CartProduct, ProductResponse } from "../types";
-import { CartBody } from "./CartBody";
+import { CartBody } from "../components/cart/CartBody";
 
 export const Cart = (): ReactElement => {
   return (

@@ -46,7 +46,6 @@ export const Footer = (): ReactElement => {
           All Rights Reserved by Binks
         </Text>
       </Box>
-      {/* </Box> */}
     </CustomBox>
   );
 };

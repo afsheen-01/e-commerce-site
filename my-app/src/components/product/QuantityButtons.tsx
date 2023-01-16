@@ -2,8 +2,8 @@ import { Heading, ButtonGroup, HStack, IconButton } from "@chakra-ui/react";
 import { ButtonGroupProps } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { increaseQuantity, decreaseQuantity } from "../redux/quantitySlice";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+import { increaseQuantity, decreaseQuantity } from "../../redux/quantitySlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 export const QuantityButtons = ({
   productId,
