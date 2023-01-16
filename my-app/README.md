@@ -1,3 +1,5 @@
+URL to the project: https://ecommerce-afsheen.netlify.app/
+
 This Project is made with react and typescript. Although, in most places, you won't see a lot of types because I let the library do the heavy lifting here but you can never be too safe and anything is better than dealing with undefined and unknown types.
 
 To run the project: `npm start`
